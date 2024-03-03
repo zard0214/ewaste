@@ -1,0 +1,64 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 403478407379-mfege25vho15a6jb993b0hhps18ljps4.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+  main:
+    allow-bean-definition-overriding: true
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, classpath:/templates/
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 123456
+#  mail:
+#    username: xxxxxxxxx@xx.com
+#    password: xxxxxxxxx
+#    host: smtp.xxx.com
+#    protocol: smtp
+#    port: 1111
+#    test-connection: true
+#    default-encoding: UTF-8
+  thymeleaf:
+    prefix: classpath:/templates
+server:
+  port: 8080
+
+mybatis-plus:
+  configuration:
+    call-setters-on-nulls: true
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: "null"
+  global-config:
+    db-config:
+      update-strategy: ignored
+  mapper-locations: classpath:/repository/**.xml
+  type-aliases-package: uk.shef.msc8.ewaste.domain.user.repository.mapper
+
+mybatis:
+  mapper-locations: classpath:/repository/**.xml
+  type-aliases-package: uk.shef.msc8.ewaste.domain.user.repository.mapper
+
+app:
+  auth:
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8080
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
